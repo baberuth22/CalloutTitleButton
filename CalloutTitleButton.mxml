@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:CalloutButton xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark"
+				 creationComplete="calloutbutton1_creationCompleteHandler(event)" >
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.components.Button;
+			
+			protected function calloutbutton1_creationCompleteHandler(event:FlexEvent):void
+			{
+				var calloutButtons:Array = this.calloutContent;
+				for( var i = 0; i < calloutButtons.length; i++){
+					var thisCalloutButton:Button = calloutButtons[i] as Button;
+					thisCalloutButton.addEventListener(MouseEvent.CLICK, thisButtonClick);
+				}
+			}
+			
+			protected function thisButtonClick(event:MouseEvent):void
+			{
+				var thisLabel = event.target.label;
+				trace(thisLabel);
+				this.label = thisLabel;
+				this.closeDropDown();
+			
+			}
+			
+		]]>
+	</fx:Script>
+</s:CalloutButton>
+
