@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:CalloutButton xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark"
+		   width="400" height="300" creationComplete="callout1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.events.IndexChangedEvent;
+			
+			import spark.components.Button;
+			import spark.components.List;
+			import spark.events.IndexChangeEvent;
+			
+			[Bindable]
+			public var labelFieldName:String = ""; 
+			
+			
+			
+			protected function callout1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				var calloutLists:Array = this.calloutContent;
+				for( var i = 0; i < calloutLists.length; i++){
+					var thisCalloutList:List = calloutLists[i] as List;
+					thisCalloutList.addEventListener(IndexChangedEvent.CHANGE, list1_changeHandler);
+				}
+				
+			}
+			
+				protected function list1_changeHandler(event:IndexChangeEvent):void
+				{
+					// TODO Auto-generated method stub
+					trace("event.target " + event.target);
+					this.label = event.target.selectedItem[labelFieldName];
+					this.closeDropDown();
+					
+					var sendEvent:Event = new Event("changedValue");
+					dispatchEvent(sendEvent);
+				}
+				
+		]]>
+	</fx:Script>
+	
+</s:CalloutButton>
+
